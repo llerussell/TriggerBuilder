@@ -7,8 +7,8 @@ synchronise experiments
 ![Imgur](http://i.imgur.com/7v4iQiy.png)
 
 ## Input
-None             : opens an interactive GUI
-Name-value pairs : runs core script using passed parameters (no GUI)
+* None             : opens an interactive GUI
+* Name-value pairs : runs core script using passed parameters (no GUI)
 
 ## Output
 out_array : 1d array or { 1d arrays } if creating more than one channel
@@ -21,6 +21,10 @@ following naming scheme:
 
 ## Example
 ```matlab
+% Load the interactive GUI
+TriggerBuilder
+
+% Call the core script using passed parameters (no GUI)
 out_array = TriggerBuilder('name_prefix',        'name',...
                            'total_num_triggers', 10,...
                            'trigger_every_ms',   1000,...
