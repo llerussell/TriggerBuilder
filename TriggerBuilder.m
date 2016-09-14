@@ -47,7 +47,7 @@ function varargout = TriggerBuilder(varargin)
 % ======-------------------------------------------------------------------
 % Lloyd Russell 2016 (@llerussell)
 
-
+filename = []; % NB HD added this
 % parse inputs
 p = inputParser;
 p.addParameter('name_prefix',        'ForPV');
@@ -69,9 +69,9 @@ parse(p, varargin{:});
 
 
 % nothing passed as input, start the GUI and load default values
-if size(varargin) == 0
+if size(varargin,2) ~= 30 % used to be size(varargin) == 0, Modified by HD 20160720 to allow for partial input passing to GUI for NAPARM 
     if nargout
-        out_array = TriggerBuilderGUI(p.Results);
+        [out_array,filename] = TriggerBuilderGUI(p.Results); % NB HD added filename to output
     else
         TriggerBuilderGUI(p.Results);
     end
@@ -86,7 +86,7 @@ else
     trigger_dur_ms     = p.Results.trigger_dur_ms;
     train_num_reps     = p.Results.train_num_reps;
     train_rep_every_ms = p.Results.train_rep_every_ms;
-    shift_by_ms        = p.Results.shift_by_ms;
+    shift_by_ms        = p.Results.shift_by_ms;%close
     tail_to_add_ms     = p.Results.tail_to_add_ms;
     jitter_ms          = p.Results.jitter_ms;
     trigger_amp_v      = p.Results.trigger_amp_v;
@@ -159,5 +159,6 @@ end
 % if output is requested
 if nargout
     varargout{1} = out_array;
+    varargout{2} = filename; % NB HD added this line
 end
         

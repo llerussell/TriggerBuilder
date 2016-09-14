@@ -63,10 +63,12 @@ update_values();
 if nargout > 0
     uiwait
     varargout{1} = out_array;
+    varargout{2} = filename; % NB HD added this line
 end
 
 % callbacks
     function update_values(varargin)
+
         update(false);
     end
 
@@ -91,7 +93,7 @@ end
         values{selected_channel}.to_blank_train     = eval(to_blank_train.String);
         
         % make output array
-        out_array{selected_channel} = TriggerBuilder(...
+        [out_array{selected_channel},filename] = TriggerBuilder(...             % NB HD added filename to output
             'name_prefix',        values{selected_channel}.name_prefix,...
             'total_num_triggers', values{selected_channel}.total_num_triggers,...
             'trigger_every_ms',   values{selected_channel}.trigger_every_ms,...
